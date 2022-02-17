@@ -1,0 +1,144 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hospital.css' %}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Payment</title>
+  </head>
+  <body style="background-image: url({% static 'img/ecommerce-legitimate-website.jpg'%}); background-size: cover;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand icons" href="#"><i class="bi-slack"></i></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'userhome' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'pharmacy' %}">Pharmacy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'cart_view' %}"><i class="bi-cart"></i></a>
+                </li>
+            </ul>
+  < div class="dropdown" style="margin-right: 50px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi-person-fill" style="color: white;"></i>&nbsp;{{user.username}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="{% url 'history' %}">Appointment</a></li>
+       <li><a class="dropdown-item" href="{% url 'm_history' %}">Pharmacy History</a></li>
+      <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="{% url 'logout_view' %}">Logout</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <div class="row" style="margin-left: 10%;">
+
+{% for foo in med %}
+
+
+
+
+    {% for price in price %}
+        {% for qty in qty %}
+    <form action="{%  url 'success' %}" method="post" style="padding-bottom: 50px; box-shadow: 0px 0px 10px gray; padding-left: 40px; padding-right: 40px; padding-top: 30px; margin-top: 100px; background-color: whitesmoke; width: 1000px; border-radius: 25px;">
+        {% csrf_token %}
+        <p style="text-align: center;"><b>Total price: </b>{{ price }} Rs</p>
+        <input type="text" name="price" value="{{ price }}" hidden>
+        <input type="text" name="qty" value="{{ qty }}" hidden>
+        <div class="row" style="height: 40px; background-color: lightgray; border-radius: 20px; padding-top: 6px;">
+            <div class="col-9">
+                CREDIT/DEBIT CARD PAYMENT
+            </div>
+            <div class="col-3">
+                <img src="{% static 'img/cards.png' %}" width="120px;">
+            </div>
+        </div>
+        <br>
+        <b>Card Number:</b><i class=""></i> <br>
+        <input type="text" class="form-control" name="card_no" placeholder="0000-0000-0000-0000" pattern="[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}" required><br>
+        <div class="row">
+            <div class="col-4">
+                <b>Exp-Date:</b> <br>
+                <input type="number" class="form-control" name="month" placeholder="MM" pattern="[0-9]{2}" min="01" max="12" required>
+            </div>
+            <div class="col-4">
+                <br>
+                <input type="number" class="form-control" name="year" placeholder="YYYY" pattern="[0-9]{4}" min="2022" max="2027" required><br>
+            </div>
+            <div class="col-4">
+                <b>CVV:</b> <br>
+                <input type="text" class="form-control" name="cvv" placeholder="000" pattern="[0-9]{3}" required>&nbsp;
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-12">
+                <b>CARD HOLDER NAME:</b> <br>
+                <input type="text" name="name" class="form-control" style="text-transform: uppercase;" required ><br>
+            </div>
+        </div>
+        <button type="submit" class="btn-primary btn">Submit</button>
+
+    </form>
+            {% endfor %}
+        {% endfor %}
+{% endfor %}
+        </div>
+</div>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+   <script>
+       //Put our input DOM element into a jQuery Object
+var $jqDate = jQuery('input[name="card_no"]');
+
+//Bind keyup/keydown to the input
+$jqDate.bind('keyup','keydown', function(e){
+
+  //To accomdate for backspacing, we detect which key was pressed - if backspace, do nothing:
+	if(e.which !== 16) {
+		var numChars = $jqDate.val().length;
+		if(numChars === 4 || numChars === 9 || numChars ===14){
+			var thisVal = $jqDate.val();
+			thisVal += '-';
+			$jqDate.val(thisVal);
+		}
+  }
+});
+   </script>
+    <script>
+if (window.history && history.pushState) {
+    addEventListener('load', function() {
+        history.pushState(null, null, null); // creates new history entry with same URL
+        addEventListener('popstate', function() {
+            var stayOnPage = confirm("Payment will be Cancelled!");
+            if (!stayOnPage) {
+               history.pushState(null, null, null);
+            } else {
+                 history.back()
+
+            }
+        });
+    });
+}
+</script>
+  </body>
+</html>

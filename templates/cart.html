@@ -1,0 +1,128 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hospital.css' %}">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Payment</title>
+  </head>
+  <body style="background-image: url({% static 'img/ecommerce-legitimate-website.jpg'%}); background-size: cover;">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand icons" href="#"><i class="bi-slack"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'userhome' %}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'pharmacy' %}">Pharmacy</a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'cart_view' %}"><i class="bi-cart"></i></a>
+        </li>
+      </ul>
+  <div class="dropdown" style="margin-right: 50px;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi-person-fill" style="color: white;"></i>&nbsp;{{user.username}}
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="{% url 'history' %}">Appointment</a></li>
+       <li><a class="dropdown-item" href="{% url 'm_history' %}">Pharmacy History</a></li>
+      <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="{% url 'logout_view' %}">Logout</a></li>
+  </ul>
+</div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+    <div class="row" style="margin-left: 10%;">
+
+
+
+
+
+
+
+    <form action="{% url 'payment' %}" method="post" style="padding-bottom: 50px; box-shadow: 0px 0px 10px gray; padding-left: 40px; padding-right: 40px; padding-top: 30px; margin-top: 100px; background-color: whitesmoke; width: 1000px; border-radius: 25px;">
+        {% csrf_token %}
+        <div class="row" style="height: 40px; background-color: lightgray; border-radius: 20px; padding-top: 6px; text-align: center;">
+            <div class="col-12">
+                <b>Your cart &nbsp;<i class="bi-cart"></i></b>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+{% for meds in cart %}
+            <tr>
+                <td>{{ meds.p_name }}<input type="hidden" name="med_name" value="{{ meds.p_name }}"></td>
+                <td>{{ meds.p_qty }}<input type="hidden" name="med_qty" value="{{ meds.p_qty }}"></td>
+                <td>{{ meds.p_price }}<input type="hidden" name="med_price" value="{{ meds.p_price }}"></td>
+                <td><a href="{% url 'remove_from_cart' meds.id %}"><i class="bi-trash float-end"></i></a></td>
+            </tr>
+{% endfor %}
+        {% for tot in total %}
+        <tr>
+            <th>Total</th>
+            <th></th>
+            <th>Rs {{ tot }}<input type="hidden" name="total" value="{{ tot }}"></th>
+            <th></th>
+        </tr>
+        {% endfor %}
+        </table>
+        <button type="submit" class="btn-primary btn">Buy</button>
+
+    </form>
+
+
+        </div>
+</div>
+  <script src="{% static 'js/bootstrap.bundle.js' %}"></script>
+   <script>
+       //Put our input DOM element into a jQuery Object
+var $jqDate = jQuery('input[name="card_no"]');
+
+//Bind keyup/keydown to the input
+$jqDate.bind('keyup','keydown', function(e){
+
+  //To accomdate for backspacing, we detect which key was pressed - if backspace, do nothing:
+	if(e.which !== 16) {
+		var numChars = $jqDate.val().length;
+		if(numChars === 4 || numChars === 9 || numChars ===14){
+			var thisVal = $jqDate.val();
+			thisVal += '-';
+			$jqDate.val(thisVal);
+		}
+  }
+});
+   </script>
+{#  <script>#}
+{#  window.onbeforeunload = function () {#}
+{#    return 'Are you sure? Your work will be lost. ';#}
+{#;#}
+{#</script>#}
+  </body>
+</html>

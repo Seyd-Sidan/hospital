@@ -1,0 +1,203 @@
+@import url("https://fonts.googleapis.com/css?family=Mukta:700");
+
+
+button {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  vertical-align: middle;
+  text-decoration: none;
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+button.learn-more {
+  width: 12rem;
+  height: auto;
+}
+button.learn-more .circle {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: relative;
+  display: block;
+  margin: 0;
+  width: 3rem;
+  height: 3rem;
+  background: #282936;
+  border-radius: 1.625rem;
+}
+button.learn-more .circle .icon {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  background: #fff;
+}
+button.learn-more .circle .icon.arrow {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  left: 0.625rem;
+  width: 1.125rem;
+  height: 0.125rem;
+  background: none;
+}
+button.learn-more .circle .icon.arrow::before {
+  position: absolute;
+  content: "";
+  top: -0.25rem;
+  right: 0.0625rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  border-top: 0.125rem solid #fff;
+  border-right: 0.125rem solid #fff;
+  transform: rotate(45deg);
+}
+button.learn-more .button-text {
+  transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.75rem 0;
+  margin: 0 0 0 1.85rem;
+  color: #282936;
+  font-weight: 700;
+  line-height: 1.6;
+  text-align: center;
+  text-transform: uppercase;
+}
+button:hover .circle {
+  width: 100%;
+}
+button:hover .circle .icon.arrow {
+  background: #fff;
+  transform: translate(1rem, 0);
+}
+button:hover .button-text {
+  color: #fff;
+}
+
+.cardmov{
+    transition: 1s;
+    box-shadow: 0px 0px 10px black;
+    animation-duration: 2s;
+    animation-name: slide;
+    animation-iteration-count: 1;
+}
+@keyframes slide {
+    from{
+        margin-top: 500px;
+    }
+    to{
+        margin-top: 0px;
+    }
+
+}
+.cardmov:hover{
+    opacity: 1;
+    transform: translateY(-15px);
+    transition: 1s;
+}
+
+.icons{
+    animation-name: rotate;
+    animation-duration: 0.1ms;
+    animation-iteration-count: infinite;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+
+
+
+
+.forms{
+	background: white;
+	border-radius: 30px;
+	padding: 20px;
+	padding-top: 35px;
+	text-align: center;
+	box-shadow: 0px 0px 70px 1px black;
+}
+
+.table1{
+	background: black;
+	width: 100%;
+	color: white;
+	height: 50vh;
+	margin-top: 10%;
+	border-radius: 15px;
+	padding: 20px;
+	text-align: center;
+	box-shadow: 0px 0px 15px 3px black
+}
+
+.cards{
+	margin-top: 25%;
+}
+
+
+.text {
+    position: absolute;
+    top: 13%;
+    right: 50%;
+    transform: translate(50%,-50%);
+    text-transform: uppercase;
+    font-family: verdana;
+    font-size: 40px;
+    font-weight: 700;
+    color: #f5f5f5;
+    text-shadow: 1px 1px 1px #919191,
+        1px 2px 1px #919191,
+        1px 3px 1px #919191,
+        1px 4px 1px #919191,
+        1px 5px 1px #919191,
+    1px 18px 6px rgba(16,16,16,0.4),
+    1px 22px 10px rgba(16,16,16,0.2),
+    1px 25px 35px rgba(16,16,16,0.2),
+    1px 30px 60px rgba(16,16,16,0.4);
+}
+
+.texts {
+  font-weight: 700;
+  /*text-shadow: 0px 0px 3px gray;*/
+  text-align: center;
+  font-size: 40px;
+  /*color: gray;*/
+  font-family: Hack, sans-serif;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #000, #fff, #000);
+  letter-spacing: 5px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-repeat: repeat;
+  background-size: 80%;
+  animation: shine 6s linear infinite;
+  position: relative;
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: -500%;
+  }
+  100% {
+    background-position-x: 500%;
+  }
+}
+
+
+.medicines{
+    background: white;
+    border-radius: 20px;
+    text-align: center;
+}

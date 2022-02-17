@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/hospital.css' %}">
+
+    <title>View Doctors</title>
+  </head>
+  <body style="background-image: url({% static 'img/young-handsome-physician-medical-robe-with-stethoscope.jpg'%}); background-size: cover;">
+	<div style="text-align: center; ">
+	  <h1 class="display-3 font-monospace">ADMIN HOME</h1>
+    </div>
+
+
+    <div style="align-content: center; position: absolute; top: 3%; left: 759px; padding-bottom: 50px; box-shadow: 0px 0px 10px gray; padding-left: 40px; padding-right: 40px; padding-top: 50px; margin-top: 100px; background-color: whitesmoke; width: 400px; border-radius: 25px;" >
+      <a href="{% url 'adddoc' %}"><button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >Add Doctors</button></a><br><br><br>
+      <a href="{% url 'viewdoc' %}" ><button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >View Doctors</button></a><br><br><br>
+	  <a href="{% url 'viewusers' %}" > <button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >View Users </button></a><br><br><br>
+	  <a href="{% url 'add_medicine' %}" > <button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >Add Medicines </button></a><br><br><br>
+	  <a href="{% url 'view_medicine' %}" > <button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >View Medicines </button></a><br><br><br>
+	  <a href="{% url 'view_booking' %}" > <button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >View Bookings </button></a><br><br><br>
+	  <a href="{% url 'view_purchase' %}" > <button type="button" class="btn btn-outline-dark btn-lg btn-block w-100" >Purchase Summary </button></a><br><br><br>
+	  <a href="{% url 'admin_logout' %}" > <button type="button" class="btn btn-outline-danger btn-lg btn-block w-100" >Logout </button></a>
+    </div>
+  </body>
+</html>
